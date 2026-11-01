@@ -1,0 +1,1111 @@
+/* RD Mzdy a účetnictví s.r.o. — rdmzdyaucto.cz */
+
+:root {
+  /* Základní paleta */
+  --navy: #172c4b;
+  --navy-deep: #0f1e34;
+  --navy-mid: #24406b;
+  --navy-tint: #e6ebf2;
+  --cream: #f7eee5;
+  --cream-dark: #ece0d2;
+  --white: #fefefe;
+
+  /* Akcent — světlá varianta na tmavém podkladu, tmavá na světlém */
+  --gold: #d9a441;
+  --gold-dark: #8a5f14;
+
+  /* Text */
+  --body-text: #3c4a60;
+  --muted: #4e5d75;
+  --on-dark: rgba(254, 254, 254, 0.86);
+
+  --font: "Montserrat", "Segoe UI", system-ui, sans-serif;
+
+  --wrap: 1160px;
+  --gap: clamp(1.1rem, 2.4vw, 2rem);
+  --section-y: clamp(3.5rem, 7vw, 6rem);
+  --radius: 4px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--white);
+  color: var(--body-text);
+  font-family: var(--font);
+  font-size: clamp(0.97rem, 0.94rem + 0.15vw, 1.03rem);
+  font-weight: 400;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font);
+  color: var(--navy);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin: 0 0 0.6em;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(2rem, 1.4rem + 2.9vw, 3.5rem);
+}
+h2 {
+  font-size: clamp(1.55rem, 1.2rem + 1.6vw, 2.3rem);
+}
+h3 {
+  font-size: 1.12rem;
+  font-weight: 700;
+  letter-spacing: -0.012em;
+}
+
+p {
+  margin: 0 0 1rem;
+  max-width: 64ch;
+  text-wrap: pretty;
+}
+
+a {
+  color: var(--navy-mid);
+  text-underline-offset: 0.2em;
+}
+a:hover {
+  color: var(--navy);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold-dark);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.wrap {
+  width: min(100% - 2.5rem, var(--wrap));
+  margin-inline: auto;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--navy);
+  color: var(--white);
+  padding: 0.75rem 1.25rem;
+  z-index: 100;
+}
+.skip-link:focus {
+  left: 0;
+}
+
+.lead {
+  font-size: clamp(1rem, 0.96rem + 0.3vw, 1.12rem);
+  color: var(--muted);
+}
+
+/* ---------- Hlavička ---------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(254, 254, 254, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--cream-dark);
+}
+
+.site-header .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 78px;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  text-decoration: none;
+  color: var(--navy);
+}
+.logo svg {
+  width: 46px;
+  height: 33px;
+  flex: none;
+}
+.logo-name {
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: inherit;
+}
+.logo-name span {
+  display: block;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.2rem;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.2vw, 2.1rem);
+}
+.nav a {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--navy);
+  text-decoration: none;
+  padding: 0.35rem 0;
+  border-bottom: 2px solid transparent;
+}
+.nav a:hover {
+  border-bottom-color: var(--cream-dark);
+}
+.nav a[aria-current="page"] {
+  border-bottom-color: var(--gold);
+}
+.nav .btn,
+.nav .btn:hover {
+  border-bottom: 0;
+  padding: 0.85rem 1.75rem;
+}
+.nav .btn-primary,
+.nav .btn-primary:hover {
+  color: var(--white);
+}
+
+.nav-toggle {
+  display: none;
+}
+
+/* ---------- Tlačítka ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font);
+  font-size: 0.87rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 0.95rem 2rem;
+  white-space: nowrap;
+  border-radius: var(--radius);
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease,
+    border-color 0.15s ease;
+}
+.btn::after {
+  content: "→";
+  font-weight: 500;
+}
+.btn-primary {
+  background: var(--navy);
+  color: var(--white);
+}
+.btn-primary:hover {
+  background: var(--navy-deep);
+  color: var(--white);
+}
+.btn-gold {
+  background: var(--gold);
+  color: var(--navy);
+}
+.btn-gold:hover {
+  background: var(--white);
+  color: var(--navy);
+}
+.btn-ghost {
+  border-color: var(--navy);
+  color: var(--navy);
+  background: transparent;
+}
+.btn-ghost:hover {
+  background: var(--navy);
+  color: var(--white);
+}
+.btn-light {
+  background: var(--white);
+  color: var(--navy);
+}
+.btn-light:hover {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  min-height: min(78vh, 660px);
+  display: flex;
+  align-items: center;
+  background: var(--navy);
+  overflow: hidden;
+}
+.hero .wrap {
+  position: relative;
+  z-index: 1;
+  padding-block: clamp(3.5rem, 8vw, 6rem);
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    100deg,
+    rgba(15, 30, 52, 0.96) 0%,
+    rgba(15, 30, 52, 0.88) 45%,
+    rgba(23, 44, 75, 0.45) 100%
+  );
+}
+.hero h1 {
+  color: var(--white);
+  max-width: 15ch;
+  margin-bottom: 1.2rem;
+}
+.hero p {
+  color: var(--on-dark);
+  max-width: 46ch;
+}
+.hero-eyebrow {
+  color: var(--gold);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 1.1rem;
+}
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 2rem;
+}
+
+/* Osobní vizitka pod hero CTA — jasně signalizuje, že jde o jednu konkrétní osobu */
+.hero-person {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 2.25rem;
+  padding: 0.6rem 1.15rem 0.6rem 0.6rem;
+  background: rgba(254, 254, 254, 0.08);
+  border: 1px solid rgba(254, 254, 254, 0.2);
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+.hero-person:hover {
+  background: rgba(254, 254, 254, 0.16);
+  border-color: rgba(254, 254, 254, 0.36);
+}
+.hero-person-avatar {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--navy);
+  display: grid;
+  place-items: center;
+  font-family: var(--font);
+  font-weight: 800;
+  font-size: 0.84rem;
+  letter-spacing: -0.02em;
+}
+.hero-person-info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+.hero-person-info strong {
+  color: var(--white);
+  font-size: 0.87rem;
+  font-weight: 700;
+}
+.hero-person-info span {
+  color: rgba(254, 254, 254, 0.78);
+  font-size: 0.76rem;
+}
+
+.hero-scroll {
+  position: absolute;
+  left: 50%;
+  bottom: 1.75rem;
+  translate: -50% 0;
+  color: rgba(254, 254, 254, 0.75);
+  font-size: 1.5rem;
+  line-height: 1;
+  text-decoration: none;
+}
+.hero-scroll:hover {
+  color: var(--white);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-scroll {
+    animation: bob 2.4s ease-in-out infinite;
+  }
+}
+@keyframes bob {
+  50% {
+    translate: -50% 7px;
+  }
+}
+
+/* Hero podstránek */
+.page-hero {
+  background: var(--navy);
+  padding-block: clamp(3rem, 6vw, 4.75rem);
+  border-bottom: 4px solid var(--gold);
+}
+.page-hero h1 {
+  color: var(--white);
+  font-size: clamp(1.85rem, 1.4rem + 2vw, 3rem);
+  margin-bottom: 0.7rem;
+}
+.page-hero p {
+  color: var(--on-dark);
+  margin-bottom: 0;
+}
+.crumb {
+  color: var(--gold);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+/* ---------- Sekce ---------- */
+
+.section {
+  padding-block: var(--section-y);
+}
+.section-tinted {
+  background: var(--cream);
+}
+.section-head {
+  max-width: 46rem;
+  margin-bottom: clamp(2.25rem, 4vw, 3.25rem);
+}
+.section-head h2 {
+  margin-bottom: 0.8rem;
+}
+.section-head p {
+  color: var(--muted);
+}
+
+/* ---------- Mřížka ikon ---------- */
+
+.icon-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.75rem, 3.5vw, 3rem) var(--gap);
+}
+.icon-item h3 {
+  margin: 0 0 0.35rem;
+}
+.icon-item p {
+  color: var(--muted);
+  font-size: 0.94rem;
+  margin: 0;
+  max-width: 34ch;
+}
+.icon-badge {
+  width: 60px;
+  height: 60px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 1.1rem;
+}
+.icon-badge svg {
+  width: 24px;
+  height: 24px;
+}
+.icon-badge-tight {
+  padding: 8px;
+}
+.icon-badge img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ---------- Barevný pás s fotkou ---------- */
+
+.band {
+  background: var(--navy);
+}
+.band-alt {
+  background: var(--navy-deep);
+}
+.band-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  padding-block: clamp(3rem, 6vw, 4.5rem);
+}
+.band h2 {
+  color: var(--white);
+}
+.band p {
+  color: var(--on-dark);
+}
+.band-media {
+  position: relative;
+  margin: 0;
+}
+.band-media img {
+  border-radius: var(--radius);
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+/* ---------- Střídavý blok text + foto ---------- */
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+.split-media {
+  position: relative;
+  margin: 0;
+}
+.split-media img {
+  border-radius: var(--radius);
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+/* Vektorové ilustrace — bez rámečku/pozadí, jen zarovnané do stejné výšky jako text vedle */
+.illustration-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+}
+.illustration-frame img {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: contain;
+  border-radius: 0;
+  aspect-ratio: auto;
+}
+
+/* Plovoucí kartička přes fotku — zlatá plocha, tmavý text */
+.float-card {
+  position: absolute;
+  right: -1.25rem;
+  bottom: -1.5rem;
+  width: min(64%, 20rem);
+  background: var(--gold);
+  color: var(--navy);
+  border-radius: var(--radius);
+  padding: 1.15rem 1.35rem;
+}
+.float-card h3 {
+  color: var(--navy);
+  font-size: 1.02rem;
+  margin-bottom: 0.3rem;
+}
+.float-card p {
+  color: var(--navy);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  margin: 0;
+}
+.float-card-left {
+  right: auto;
+  left: -1.25rem;
+}
+
+/* ---------- Odrážkové seznamy ---------- */
+
+.checklist {
+  list-style: none;
+  margin: 1.6rem 0 0;
+  padding: 0;
+}
+.checklist li {
+  position: relative;
+  padding-left: 1.75rem;
+  margin-bottom: 0.75rem;
+  max-width: 56ch;
+}
+.checklist li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--gold-dark);
+}
+.band .checklist li {
+  color: var(--on-dark);
+}
+.band .checklist li::before {
+  background: var(--gold);
+}
+.checklist-cols {
+  columns: 2;
+  column-gap: var(--gap);
+}
+.checklist-cols li {
+  break-inside: avoid;
+}
+
+/* ---------- Karty ---------- */
+
+.grid {
+  display: grid;
+  gap: var(--gap);
+}
+.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.card {
+  background: var(--white);
+  border: 1px solid var(--cream-dark);
+  border-radius: var(--radius);
+  border-top: 3px solid var(--navy);
+  padding: clamp(1.4rem, 2.5vw, 1.9rem);
+}
+.card h3 {
+  margin-bottom: 0.45rem;
+}
+.card p {
+  color: var(--muted);
+  font-size: 0.94rem;
+  margin-bottom: 0;
+}
+.card ul {
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.card ul li {
+  position: relative;
+  padding-left: 1.1rem;
+  font-size: 0.92rem;
+  color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+.card ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 5px;
+  height: 5px;
+  background: var(--gold-dark);
+  border-radius: 50%;
+}
+.card-tag {
+  color: var(--navy-mid);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+}
+
+/* ---------- Kroky ---------- */
+
+.steps {
+  list-style: none;
+  counter-reset: step;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gap);
+}
+.steps li {
+  counter-increment: step;
+  border-top: 2px solid var(--cream-dark);
+  padding-top: 1.1rem;
+}
+.steps li::before {
+  content: counter(step);
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: var(--white);
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-bottom: 0.85rem;
+}
+.steps h3 {
+  font-size: 1.02rem;
+  margin-bottom: 0.35rem;
+}
+.steps p {
+  font-size: 0.91rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* ---------- Uzavírací pás ---------- */
+
+.cta-band {
+  background: var(--cream);
+  padding-block: clamp(3rem, 6vw, 4.5rem);
+}
+.cta-band .wrap {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+.cta-band h2 {
+  margin-bottom: 1.5rem;
+}
+.cta-band .checklist {
+  margin-top: 0;
+}
+
+/* ---------- Kontakt ---------- */
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+.contact-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.contact-list li {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--cream-dark);
+}
+.contact-list li:first-child {
+  padding-top: 0;
+}
+.contact-icon {
+  flex: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--navy-tint);
+  color: var(--navy);
+  display: grid;
+  place-items: center;
+}
+.contact-icon svg {
+  width: 18px;
+  height: 18px;
+}
+.contact-key {
+  display: block;
+  color: var(--muted);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 0.2rem;
+}
+.contact-value {
+  color: var(--navy);
+  font-size: 1rem;
+  font-weight: 500;
+}
+.contact-value a {
+  text-decoration: none;
+}
+.contact-value a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Formulář ---------- */
+
+.form {
+  background: var(--cream);
+  border: 1px solid var(--cream-dark);
+  border-radius: var(--radius);
+  padding: clamp(1.5rem, 3vw, 2.3rem);
+}
+.form h2 {
+  font-size: 1.4rem;
+}
+.field {
+  margin-bottom: 1.1rem;
+}
+.field label {
+  display: block;
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+.field input,
+.field textarea {
+  width: 100%;
+  font-family: var(--font);
+  font-size: 1rem;
+  color: var(--navy);
+  background: var(--white);
+  border: 1px solid var(--cream-dark);
+  border-radius: var(--radius);
+  padding: 0.72rem 0.85rem;
+}
+.field input:focus,
+.field textarea:focus {
+  border-color: var(--navy-mid);
+  outline: 2px solid rgba(36, 64, 107, 0.3);
+  outline-offset: 0;
+}
+.field textarea {
+  min-height: 9rem;
+  resize: vertical;
+}
+.field-consent {
+  display: flex;
+  gap: 0.65rem;
+  align-items: flex-start;
+  margin-bottom: 1.4rem;
+}
+.field-consent input {
+  width: auto;
+  margin-top: 0.3rem;
+  flex: none;
+  accent-color: var(--navy);
+}
+.field-consent label {
+  font-size: 0.88rem;
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--body-text);
+  margin: 0;
+}
+.hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.form-note {
+  font-size: 0.84rem;
+  color: var(--muted);
+  margin: 1rem 0 0;
+}
+
+/* ---------- Ceník ---------- */
+
+.note-box {
+  border-left: 4px solid var(--gold-dark);
+  background: var(--cream);
+  color: var(--body-text);
+  padding: 1.1rem 1.4rem;
+  margin: 2rem 0 0;
+}
+.note-box strong {
+  color: var(--navy);
+}
+.note-box p:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- Patička ---------- */
+
+.site-footer {
+  background: var(--navy-deep);
+  color: var(--on-dark);
+  padding-block: clamp(3rem, 6vw, 4.5rem) 1.75rem;
+  font-size: 0.93rem;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr 0.8fr;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  padding-bottom: 2.25rem;
+  border-bottom: 1px solid rgba(254, 254, 254, 0.18);
+}
+.site-footer .logo {
+  color: var(--white);
+}
+.site-footer .logo-name span {
+  color: rgba(254, 254, 254, 0.65);
+}
+.site-footer h4 {
+  color: var(--gold);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 1.1rem;
+}
+.site-footer a {
+  color: var(--white);
+  text-decoration: none;
+}
+.site-footer a:hover {
+  text-decoration: underline;
+}
+.site-footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.site-footer li {
+  margin-bottom: 0.55rem;
+}
+.footer-facts {
+  margin-top: 1.35rem;
+  font-size: 0.8rem;
+  line-height: 1.95;
+  color: rgba(254, 254, 254, 0.72);
+}
+.footer-contact li {
+  display: flex;
+  gap: 0.8rem;
+  align-items: flex-start;
+}
+.footer-contact .contact-icon {
+  width: 34px;
+  height: 34px;
+  background: rgba(254, 254, 254, 0.12);
+  color: var(--gold);
+}
+.footer-contact .contact-icon svg {
+  width: 15px;
+  height: 15px;
+}
+.footer-bottom {
+  padding-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.74rem;
+  letter-spacing: 0.04em;
+  color: rgba(254, 254, 254, 0.62);
+}
+
+/* ---------- Scroll reveal ---------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Responzivita ---------- */
+
+@media (max-width: 940px) {
+  .band-inner,
+  .split,
+  .contact-grid,
+  .cta-band .wrap {
+    grid-template-columns: 1fr;
+  }
+  .icon-grid,
+  .grid-3,
+  .grid-2,
+  .steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .band-media,
+  .split-media {
+    order: -1;
+  }
+  .float-card {
+    right: 1rem;
+    bottom: -1rem;
+  }
+  .float-card-left {
+    left: 1rem;
+    right: auto;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    background: transparent;
+    border: 1px solid var(--navy);
+    border-radius: var(--radius);
+    color: var(--navy);
+    padding: 0.62rem 0.95rem;
+  }
+  .nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: var(--white);
+    border-bottom: 1px solid var(--cream-dark);
+    padding: 0.5rem 1.25rem 1.35rem;
+  }
+  .nav[hidden] {
+    display: none;
+  }
+  .nav a {
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--cream-dark);
+  }
+  .nav .btn {
+    margin-top: 1rem;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .icon-grid,
+  .grid-3,
+  .grid-2,
+  .steps,
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+  .checklist-cols {
+    columns: 1;
+  }
+  .hero {
+    min-height: 0;
+  }
+  .float-card {
+    position: static;
+    width: auto;
+    margin-top: 0.75rem;
+  }
+}
+
+/* ---------- Cookie banner ---------- */
+
+.cookie-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+  background: var(--navy);
+  padding: 1.15rem 1.25rem;
+  box-shadow: 0 -8px 30px -12px rgba(0, 0, 0, 0.4);
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+.cookie-banner.is-visible {
+  transform: translateY(0);
+}
+.cookie-banner-inner {
+  max-width: var(--wrap);
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.cookie-banner-inner p {
+  flex: 1 1 320px;
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--on-dark);
+  max-width: none;
+}
+.cookie-banner-inner a {
+  color: var(--gold);
+}
+.cookie-banner-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex: none;
+}
+.cookie-banner .btn-ghost {
+  border-color: rgba(254, 254, 254, 0.45);
+  color: var(--white);
+}
+.cookie-banner .btn-ghost:hover {
+  background: rgba(254, 254, 254, 0.12);
+  border-color: var(--white);
+  color: var(--white);
+}
+@media (max-width: 640px) {
+  .cookie-banner-actions {
+    width: 100%;
+  }
+  .cookie-banner-actions .btn {
+    flex: 1;
+    justify-content: center;
+  }
+}
