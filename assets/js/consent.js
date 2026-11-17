@@ -3,7 +3,7 @@
   "use strict";
 
   var KEY = "rd-cookie-consent";
-  var GA_ID = "G-473N7QTW4C";
+  var GA_ID = "G-TKBNPJ2WSD";
 
   function loadGA() {
     if (window.__gaLoaded) return;
